@@ -1,0 +1,20 @@
+﻿@model SimplePosts.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SubmitError</title>
+</head>
+<body>
+    <div>
+        Error!!  Username: @Model.Username already taken!! Try again!!
+        @Html.ActionLink("Go Back", "Index", "Register")
+    </div>
+</body>
+</html>

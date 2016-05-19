@@ -1,0 +1,27 @@
+﻿@model SimplePosts.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <i>Username:   </i>@Html.TextBoxFor(u => u.Username)<br /><span>@Html.ValidationMessageFor(u => u.Username)</span><br />
+            <i>Password:   </i>@Html.PasswordFor(p => p.Password)<br /><span>@Html.ValidationMessageFor(p => p.Password)</span><br />
+            <input id="submit" type="submit" value="Login" />
+        }
+    </div>
+    <div>
+        Not a user? <a href="/Login/Register/">Register!</a>
+    </div>
+</body>
+</html>
