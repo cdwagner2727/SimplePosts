@@ -75,19 +75,21 @@ namespace SimplePosts.DAL
             return posts;
         }
 
+        //issue here when editing newly created items too quickly.
         public Post GetPostById(int id)
         {
-            return this.Posts.First(p => p.Id == id);
+            return this.Posts.FirstOrDefault(p => p.Id == id);
         }
 
         //need to add post, save changes, then get post again in order to get dynamically created Post Id.
-        internal void AddPost(Post p, User u)
+        public int AddPost(Post p, User u)
         {
             p.Author = u.Username;
             this.Posts.Add(p);
             this.SaveChanges();
             UserPost uPost = new UserPost(u, p);
             this.AddUserPost(uPost);
+            return p.Id;
         }
 
         private void AddUserPost(UserPost uPost)
@@ -96,9 +98,9 @@ namespace SimplePosts.DAL
             this.SaveChanges();
         }
 
-        //private int Add(Post p)
-        //{
-
-        //}
+        internal List<Post> GetAllPosts()
+        {
+            return this.Posts.ToList<Post>();
+        }
     }
 }

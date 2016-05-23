@@ -23,3 +23,4 @@ c:\users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin
 c:\users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\System.Web.WebPages.Razor.xml
 c:\users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\obj\Debug\SimplePosts.dll
 c:\users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\obj\Debug\SimplePosts.pdb
+C:\Users\cdwag\Documents\Visual Studio 2013\Projects\SimplePosts\SimplePosts\obj\Debug\SimplePosts.csprojResolveAssemblyReference.cache

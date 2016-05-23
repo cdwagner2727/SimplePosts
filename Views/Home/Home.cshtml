@@ -2,7 +2,6 @@
 
 @{
     Layout = null;
-    var sessionVar = HttpContext.Current.Session["User"];
 }
 
 <!DOCTYPE html>
@@ -10,25 +9,30 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title>AccountSummary</title>
+        <title>Posts for @Session["Username"]</title>
 
-        <script src="~/Scripts/jquery-2.2.3.js"></script>
-        <script src="~/Scripts/jquery.validate.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-        <script src="~/Scripts/knockout-3.4.0.js"></script>
-        <script src="~/Scripts/knockout.mapping-latest.js"></script>
-
-
+        <script src="@Url.Content("~/Scripts/jquery-2.2.3.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout-3.4.0.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")"></script>
     </head>
     <body>
         <div>
-            Welcome, @Session["Username"].  Not @Session["Username"]? <a href="/Login/Logout/">Logout</a>
-            <form>
-                Author: <input type="text" id="authorInput" /><br />
-                Title: <input type="text" id="titleInput" /><br />
-                Content: <textarea id="contentInput"></textarea><br />
-                <input type="submit" data-bind="click: addPost" name="Submit" value="Save" />
-            </form>
+            @if (Session["User"] == null)
+            {
+
+            }
+            else
+            {
+                <p>Welcome, @Model.UserObj.Username.  Not @Model.UserObj.Username? <a href="/Login/Logout/">Logout</a></p>
+                using(Html.BeginForm("AddPost", "Home", FormMethod.Post, new { onsubmit = "return addPost(event);" }))
+                {
+                    <i>Title:   </i>@Html.TextBoxFor(p => p.PostObj.Title, new { @id = "titleInput" })<br /><span>@Html.ValidationMessageFor(p => p.PostObj.Title)</span><br />
+                    <i>Content:   </i>@Html.TextAreaFor(p => p.PostObj.Content, new { @id = "contentInput" })<br /><span>@Html.ValidationMessageFor(p => p.PostObj.Content)</span><br />
+                    <input id="submit" type="submit" value="Save" />
+                }
+            }
         </div>
         
         <div>
@@ -39,14 +43,13 @@
                         <td>Title:</td>
                         <td>
                             <span data-bind="text: Title, visible: !editable()"></span>
-                            <span data-bind="visible: editable"><input type="text" data-bind="value: Title, attr: { 'id': $index() + 'titleEdit' }" /></span>
+                            <span data-bind="visible: editable"><input type="text" data-bind="value: Title, attr: { 'id': $index() + 'titleEdit' }" /><a href="#" data-bind="click: toggleEditable">[X]</a></span>
                         </td>
                     </tr>
                     <tr>
                         <td>Author:</td>
                         <td>
-                            <span data-bind="text: Author, visible: !editable()"></span>
-                            <span data-bind="visible: editable"><input type="text" data-bind="value: Author, attr: { 'id': $index() + 'authorEdit' }" /></span>
+                            @Model.UserObj.Username
                         </td>
                     </tr>
                     <tr>
@@ -62,7 +65,7 @@
                                 <input type="button" data-bind="click: toggleEditable, visible: !editable()" value="Edit" />
                             </span>
                             <span data-bind="visible: editable">
-                                <input type="button" data-bind="click: updatePost, visible: editable" value="Save" />
+                                <input type="button" data-bind="click: updatePost" value="Save" />
                             </span>
                         </td>
                         <td><input type="button" data-bind="click: removePost" value="Remove" /></td>
@@ -74,8 +77,6 @@
 
             var postVM = function() {
                 var self = this;
-
-                self.temp = ko.observableArray([]);
                 self.posts = ko.observableArray([]);
 
                 var mapping = 
@@ -105,39 +106,56 @@
                 };
 
                 self.removePost = function () {
-                    self.posts.remove(this);
-                    self.postChanges("/Home/RemovePost/", this);
+                    var localThis = this;
+                    self.postChanges("/Home/RemovePost/", this, function(){
+                        self.posts.remove(localThis);
+                    });
                 };
 
                 self.updatePost = function (data, event) {
                     var context = ko.contextFor(event.target);
                     var index = context.$index();
-                    var authorSel = "#" + index + "authorEdit";
                     var titleSel = "#" + index + "titleEdit";
                     var contentSel = "#" + index + "contentEdit";
-                    this.Author($(authorSel).val());
+                    this.Author("@Model.UserObj.Username");
                     this.Title($(titleSel).val());
                     this.Content($(contentSel).val());
-                    self.postChanges("/Home/UpdatePost/", this)
+                    self.postChanges("/Home/UpdatePost/", this, function(){})
                     self.toggleEditable(this);
                 };
 
-                self.addPost = function () {
+                self.addPost = function (event) {
+
+                    event.preventDefault();
                     var newPost = {
-                        Author: ko.observable($("#authorInput").val()),
+                        //Author: ko.observable($("#authorInput").val()),
+                        Author: "@Model.UserObj.Username",
                         Title: ko.observable($("#titleInput").val()),
                         Content: ko.observable($("#contentInput").val())
                     };
-                    //if(self.posts() == null){
-                    //    self.posts = ko.observableArray([]);
-                    //}
-                    self.posts.push(new Data(newPost));
-                    self.postChanges("/Home/AddPost/", newPost);
+                    self.postChanges("/Home/AddPost/", newPost, function(data){
+                        if(data != "false"){
+                            var post = new Data(newPost);
+                            post.Id = data;
+                            self.posts.push(post);
+                            self.validPost = false;
+                        }
+                    });
                 };
 
-                self.postChanges = function (strLocation, data) {
-                    var post = ko.mapping.toJS(data);
-                    $.post(strLocation, post);
+                self.postChanges = function (strLocation, postData, callback) {
+                    var post = ko.mapping.toJS(postData);
+                    $.ajax({
+                        url: strLocation,
+                        type: "POST",
+                        dataType: "text",
+                        data: postData,
+                        success: callback,
+                        error: function(textStatus) {
+                            alert("Something went wrong, post failed.");
+                            //alert(textStatus.responseText);
+                        }
+                    });
                 };
 
                 self.logOut = function () {
@@ -145,6 +163,7 @@
                 }
             };
             ko.applyBindings(postVM());
+
         </script>
     </body>
 </html>
