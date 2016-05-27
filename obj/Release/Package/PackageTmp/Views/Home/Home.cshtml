@@ -10,6 +10,7 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>Posts for @Session["Username"]</title>
+<<<<<<< HEAD
 
         <script src="@Url.Content("~/Scripts/jquery-2.2.3.js")"></script>
         <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
@@ -27,10 +28,48 @@
             {
                 <p>Welcome, Guest.  Please feel free to <a href="/Login/Login/">Login</a> or <a href="/Login/Register">Register</a></p>
                 
+=======
+<<<<<<< HEAD
+
+        <script src="@Url.Content("~/Scripts/jquery-2.2.3.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout-3.4.0.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")"></script>
+
+        <style>
+            tbody {margin-bottom: 2em;}
+        </style>
+    </head>
+    <body>
+        <div>
+            @if (@Model.UserObj.Username == "Guest")
+            {
+                <p>Welcome, Guest.  Please feel free to <a href="/Login/Login/">Login</a> or <a href="/Login/Register">Register</a></p>
+                
+=======
+
+        <script src="@Url.Content("~/Scripts/jquery-2.2.3.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout-3.4.0.js")"></script>
+        <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")"></script>
+    </head>
+    <body>
+        <div>
+            @if (Session["User"] == null)
+            {
+
+>>>>>>> origin/master
+>>>>>>> origin/master
             }
             else
             {
                 <p>Welcome, @Model.UserObj.Username.  Not @Model.UserObj.Username? <a href="/Login/Logout/">Logout</a></p>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
                 using (Html.BeginForm("AddPost", "Home", FormMethod.Post, new { onsubmit = "return addPost(event);" }))
                 {
                     <i>Title:   </i>@Html.TextBoxFor(p => p.PostObj.Title, new { @id = "titleInput" })<br /><span>@Html.ValidationMessageFor(p => p.PostObj.Title)</span><br />
@@ -41,6 +80,7 @@
             }
             
             
+<<<<<<< HEAD
         </div>
         
         <div>
@@ -85,6 +125,100 @@
                         }
                 </table>
             </div>
+=======
+        </div>
+        
+        <div>
+            @if (@Model.UserObj.Username == "Guest"){
+                <div><h4>Public posts:</h4></div>
+            }
+                <div data-bind ="foreach: posts">
+                    <table style="margin-bottom: 2em">
+                        <tr>
+                            <td>Title:</td>
+                            <td>
+                                <span data-bind="text: Title, visible: !editable()"></span>
+                                <span data-bind="visible: editable"><input type="text" data-bind="value: Title, attr: { 'id': $index() + 'titleEdit' }" /><a href="#" data-bind="click: toggleEditable">[X]</a></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Author:</td>
+                            <td>
+                                @Model.UserObj.Username
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Content:</td>
+                            <td>
+                                <span data-bind="text: Content, visible: !editable()"></span>
+                                <span data-bind="visible: editable"><input type="text" data-bind="value: Content, attr: { 'id': $index() + 'contentEdit' }" /></span>
+                            </td>
+                        </tr>
+                        @if (@Model.UserObj.Username != "Guest"){
+                            <tr>
+                                <td>
+                                    <span data-bind="visible: !editable()">
+                                        <input type="button" data-bind="click: toggleEditable, visible: !editable()" value="Edit" />
+                                    </span>
+                                    <span data-bind="visible: editable">
+                                        <input type="button" data-bind="click: updatePost" value="Save" />
+                                        <span>Is public: <input type="checkbox" data-bind="checked: Public, attr: { 'id': $index() + 'publicEdit' }" /></span>
+                                    </span>
+                                </td>
+                                <td><input type="button" data-bind="click: removePost" value="Remove" /></td>
+                            </tr>
+                        }
+                </table>
+            </div>
+=======
+                using(Html.BeginForm("AddPost", "Home", FormMethod.Post, new { onsubmit = "return addPost(event);" }))
+                {
+                    <i>Title:   </i>@Html.TextBoxFor(p => p.PostObj.Title, new { @id = "titleInput" })<br /><span>@Html.ValidationMessageFor(p => p.PostObj.Title)</span><br />
+                    <i>Content:   </i>@Html.TextAreaFor(p => p.PostObj.Content, new { @id = "contentInput" })<br /><span>@Html.ValidationMessageFor(p => p.PostObj.Content)</span><br />
+                    <input id="submit" type="submit" value="Save" />
+                }
+            }
+        </div>
+        
+        <div>
+            <table data-bind="foreach: posts">
+
+                <tbody data-bind="attr: { id: $index }">
+                    <tr>
+                        <td>Title:</td>
+                        <td>
+                            <span data-bind="text: Title, visible: !editable()"></span>
+                            <span data-bind="visible: editable"><input type="text" data-bind="value: Title, attr: { 'id': $index() + 'titleEdit' }" /><a href="#" data-bind="click: toggleEditable">[X]</a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Author:</td>
+                        <td>
+                            @Model.UserObj.Username
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Content:</td>
+                        <td>
+                            <span data-bind="text: Content, visible: !editable()"></span>
+                            <span data-bind="visible: editable"><input type="text" data-bind="value: Content, attr: { 'id': $index() + 'contentEdit' }" /></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span data-bind="visible: !editable()">
+                                <input type="button" data-bind="click: toggleEditable, visible: !editable()" value="Edit" />
+                            </span>
+                            <span data-bind="visible: editable">
+                                <input type="button" data-bind="click: updatePost" value="Save" />
+                            </span>
+                        </td>
+                        <td><input type="button" data-bind="click: removePost" value="Remove" /></td>
+                    </tr>
+                </tbody>
+            </table>
+>>>>>>> origin/master
+>>>>>>> origin/master
         </div>
         <script type="text/javascript">
 
@@ -130,10 +264,22 @@
                     var index = context.$index();
                     var titleSel = "#" + index + "titleEdit";
                     var contentSel = "#" + index + "contentEdit";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
                     var publicSel = "#" + index + "publicEdit";
                     this.Title($(titleSel).val());
                     this.Content($(contentSel).val());
                     this.Public($(publicSel).prop("checked"));
+<<<<<<< HEAD
+=======
+=======
+                    this.Author("@Model.UserObj.Username");
+                    this.Title($(titleSel).val());
+                    this.Content($(contentSel).val());
+>>>>>>> origin/master
+>>>>>>> origin/master
                     self.postChanges("/Home/UpdatePost/", this, function(){})
                     self.toggleEditable(this);
                 };
@@ -142,6 +288,14 @@
 
                     event.preventDefault();
                     var newPost = {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                        //Author: ko.observable($("#authorInput").val()),
+                        Author: "@Model.UserObj.Username",
+>>>>>>> origin/master
+>>>>>>> origin/master
                         Title: ko.observable($("#titleInput").val()),
                         Content: ko.observable($("#contentInput").val()),
                         Public: ko.observable($("#publicInput").prop("checked"))
@@ -176,6 +330,7 @@
                 }
             };
             ko.applyBindings(postVM());
+
         </script>
     </body>
 </html>
