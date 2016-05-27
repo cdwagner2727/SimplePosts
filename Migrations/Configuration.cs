@@ -10,7 +10,10 @@ namespace SimplePosts.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+<<<<<<< HEAD
             AutomaticMigrationDataLossAllowed = true;
+=======
+>>>>>>> origin/master
         }
 
         protected override void Seed(SimplePosts.DAL.PostDAL context)

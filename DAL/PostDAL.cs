@@ -103,15 +103,19 @@ namespace SimplePosts.DAL
             this.SaveChanges();
         }
 
+<<<<<<< HEAD
         private UserPost GetUserPostByPost(Post p)
         {
             return this.UserPosts.FirstOrDefault(u => u.PostId == p.Id);
         }
 
+=======
+>>>>>>> origin/master
         internal List<Post> GetAllPosts()
         {
             return this.Posts.ToList<Post>();
         }
+<<<<<<< HEAD
         //overload GetAllPosts to limit to just Posts with Public set to true.
         internal List<Post> GetAllPosts(bool isPublic)
         {
@@ -123,5 +127,7 @@ namespace SimplePosts.DAL
             UserPost uPost = GetUserPostByPost(p);
             return this.GetUserById(uPost.UserId);
         }
+=======
+>>>>>>> origin/master
     }
 }

@@ -22,11 +22,17 @@ namespace SimplePosts.Controllers
             _vm.UserObj = u;
             if (u == null)
             {
+<<<<<<< HEAD
                 _vm.PostList = _dal.GetAllPosts(true);
                 //pass it "special" Guest user object
                 _vm.UserObj = _dal.GetUserByUsername("Guest");
                 return View("Home", _vm);
                 //return RedirectToAction("Login", "Login");
+=======
+                //_vm.PostList = _dal.GetAllPosts();
+                //return View("Home", _vm);
+                return RedirectToAction("Login", "Login");
+>>>>>>> origin/master
             }
             else
             {
@@ -60,8 +66,12 @@ namespace SimplePosts.Controllers
             _dal.Posts.Attach(p);
             _dal.Posts.Remove(p);
             _dal.SaveChanges();
+<<<<<<< HEAD
             _vm.UserObj = _dal.GetUserByPost(p);
             //_vm.UserObj = _dal.GetUserByUsername(p.Author);
+=======
+            _vm.UserObj = _dal.GetUserByUsername(p.Author);
+>>>>>>> origin/master
             _vm.PostList = _dal.GetPostsByUser(_vm.UserObj);
             return View("Home", _vm);
         }
@@ -75,8 +85,12 @@ namespace SimplePosts.Controllers
             oldPost.Content = p.Content;
             oldPost.Public = p.Public;
             _dal.SaveChanges();
+<<<<<<< HEAD
             _vm.UserObj = _dal.GetUserByPost(p);
 //            _vm.UserObj = _dal.GetUserByUsername(p.Author);
+=======
+            _vm.UserObj = _dal.GetUserByUsername(p.Author);
+>>>>>>> origin/master
             _vm.PostList = _dal.GetPostsByUser(_vm.UserObj);
             return View("Home", _vm);
         }
