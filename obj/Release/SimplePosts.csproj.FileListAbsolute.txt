@@ -24,3 +24,14 @@ C:\Users\cdwag\Documents\Visual Studio 2013\Projects\SimplePosts\SimplePosts\bin
 C:\Users\cdwag\Documents\Visual Studio 2013\Projects\SimplePosts\SimplePosts\obj\Release\SimplePosts.csprojResolveAssemblyReference.cache
 C:\Users\cdwag\Documents\Visual Studio 2013\Projects\SimplePosts\SimplePosts\obj\Release\SimplePosts.dll
 C:\Users\cdwag\Documents\Visual Studio 2013\Projects\SimplePosts\SimplePosts\obj\Release\SimplePosts.pdb
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.Security.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Owin.dll
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.xml
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\cdwag\documents\visual studio 2013\Projects\SimplePosts\SimplePosts\bin\Microsoft.Owin.Security.xml

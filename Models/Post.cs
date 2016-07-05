@@ -14,6 +14,8 @@ namespace SimplePosts.Models
         public string Author { get; set; }
         [Required]
         public string Content { get; set; }
+        [Required]
+        public bool Public { get; set; }
         [Key]
         public int Id { get; set; }
     }

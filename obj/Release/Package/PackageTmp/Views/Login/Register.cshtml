@@ -23,7 +23,7 @@
             <i>Last Name:  </i>@Html.TextBoxFor(n => n.LastName)<br /><span>@Html.ValidationMessageFor(n => n.LastName)</span><br />
             <i>Username:   </i>@Html.TextBoxFor(u => u.Username)<br /><span>@Html.ValidationMessageFor(u => u.Username)</span><br />
             <i>Password:   </i>@Html.PasswordFor(p => p.Password)<br /><span>@Html.ValidationMessageFor(p => p.Password)</span><br />
-            <input id="Submit1" type="submit" value="submit" />
+            <input id="Submit" type="submit" value="Register" />
         }
     </div>
     <div>Already a member?  <a href="/Login/">Login!</a></div>

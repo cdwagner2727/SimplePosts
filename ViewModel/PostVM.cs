@@ -10,6 +10,7 @@ namespace SimplePosts.ViewModel
     {
         public Post PostObj { get; set; }
         public List<Post> PostList { get; set; }
+        public List<Post> PublicPostList { get; set; }
         public User UserObj { get; set; }
         public List<User> UserList {get; set;}
     }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SimplePosts.DAL;
 using SimplePosts.Models;
 using SimplePosts.ViewModel;
+using SimplePosts.Hubs;
 using System.ComponentModel.DataAnnotations;
 
 namespace SimplePosts.Controllers
@@ -19,13 +20,20 @@ namespace SimplePosts.Controllers
         public ActionResult Index()
         {
             var u = Session["User"] as User;
+            _vm.UserObj = u;
             if (u == null)
             {
-                return RedirectToAction("Login", "Login");
+                //override GetAllPosts by using bool parameter to return all public posts.
+                _vm.PostList = _dal.GetAllPosts(true);
+                //pass it "special" Guest user object
+                _vm.UserObj = _dal.GetUserByUsername("Guest");
+                return View("Home", _vm);
+                //return RedirectToAction("Login", "Login");
             }
             else
             {
                 _vm.PostList = _dal.GetPostsByUser(u);
+                _vm.PublicPostList = _dal.GetAllPosts(true);
                 return View("Home", _vm);
             }
 //            return View("Home", _vm);
@@ -35,9 +43,22 @@ namespace SimplePosts.Controllers
         public ActionResult AddPost(Post p)
         {
             var u = Session["User"] as User;
-            _dal.AddPost(p, u);
-            _vm.PostList = _dal.GetPostsByUser(u);
-            return View("Home", _vm);
+            if (ModelState.IsValid)
+            {
+                var temp = _dal.AddPost(p, u);
+                if (p.Public == true)
+                {
+                    PostHub.SendPost(p);
+                }
+                _vm.PostList = _dal.GetPostsByUser(u);
+                return Content(temp.ToString());
+            }
+            else
+            {
+                _vm.PostList = _dal.GetPostsByUser(u);
+                return Content("false");
+                //return View("Home", _vm);
+            }
         }
 
         //change this to also delete the corresponding UserPost... or maybe just the corresponding UserPost
@@ -46,18 +67,25 @@ namespace SimplePosts.Controllers
             _dal.Posts.Attach(p);
             _dal.Posts.Remove(p);
             _dal.SaveChanges();
-            return View("Home");
+            _vm.UserObj = _dal.GetUserByPost(p);
+            //_vm.UserObj = _dal.GetUserByUsername(p.Author);
+            _vm.PostList = _dal.GetPostsByUser(_vm.UserObj);
+            return View("Home", _vm);
         }
 
         //Looks like theres an issue here if you create a new post and submit an edit to it too quickly it hasn't yet been added to the db.
         public ActionResult UpdatePost(Post p)
         {
             Post oldPost = _dal.GetPostById(p.Id);
-            oldPost.Author = p.Author;
+            //oldPost.Author = p.Author;
             oldPost.Title = p.Title;
             oldPost.Content = p.Content;
+            oldPost.Public = p.Public;
             _dal.SaveChanges();
-            return View("Home");
+            _vm.UserObj = _dal.GetUserByPost(p);
+//            _vm.UserObj = _dal.GetUserByUsername(p.Author);
+            _vm.PostList = _dal.GetPostsByUser(_vm.UserObj);
+            return View("Home", _vm);
         }
 
         public ActionResult GetPostsByUser(User u)

@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="PostDAL-Web.config Connection String" description="PostDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=(localdb)\ProjectsV12;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\cdwag\\Documents\\Visual\ Studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PostDAL']/@connectionString" />
+  <parameter name="PostDAL-Web.config Connection String" description="PostDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=(test)\ProjectsV12;Initial Catalog=test;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\cdwag\\documents\\visual\ studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PostDAL']/@connectionString" />
+  </parameter>
+  <parameter name="PostDAL_DatabasePublish-Web.config Connection String" description="PostDAL_DatabasePublish Connection String used in web.config by the application to access the database." defaultValue="PostDAL_DatabasePublish.ConnetionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\cdwag\\documents\\visual\ studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PostDAL_DatabasePublish']/@connectionString" />
   </parameter>
 </parameters>

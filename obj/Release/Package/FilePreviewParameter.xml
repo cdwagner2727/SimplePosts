@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="SimplePosts" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\cdwag\\Documents\\Visual\ Studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\cdwag\\Documents\\Visual\ Studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\cdwag\\documents\\visual\ studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\cdwag\\documents\\visual\ studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="PostDAL-Web.config Connection String" description="" value="Data Source=faceupdev.database.windows.net;Initial Catalog=master;Persist Security Info=True;User ID=cdwagner2727;Password=L1v3S1mply" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\cdwag\\Documents\\Visual\ Studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PostDAL']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\cdwag\\documents\\visual\ studio\ 2013\\Projects\\SimplePosts\\SimplePosts\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='PostDAL']/@connectionString" />
   </parameter>
 </parameters>
